@@ -63,3 +63,7 @@ Feel free to customize the Flask application (`app.py`) and HTML template (`temp
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
+- [simeononsecurity.com](https://simeononsecurity.com)
+- [simeononsecurity-rss.onrender.com](https://simeononsecurity-rss.onrender.com/)
