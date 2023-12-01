@@ -2,6 +2,8 @@
 
 This Docker container is designed to fetch and display the latest posts from a specified RSS feed using Python, Flask, and feedparser.
 
+[![Docker Image CI](https://github.com/simeononsecurity/docker-rss-display-web/actions/workflows/docker-image.yml/badge.svg)](https://github.com/simeononsecurity/docker-rss-display-web/actions/workflows/docker-image.yml)
+
 ## Usage
 
 1. Clone this repository:
@@ -48,9 +50,9 @@ docker run -p 8080:80 --name rss-container -e RSS_FEED_URL=https://example.com/r
 ```
 ## Dependencies
 
-- Flask==2.2.5
-- Werkzeug==2.0.1
-- feedparser==6.0.8
+- Flask
+- Werkzeug
+- feedparser
 
 These dependencies are listed in the `requirements.txt` file.
 
