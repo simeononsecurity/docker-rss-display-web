@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name=viewport content="width=device-width,initial-scale=1">
   <title>Latest Posts{% if feed.title %} - {{ feed.title }}{% endif %}</title>
   {% if feed.author %}<meta name="author" content="{{ feed.author }}">{% endif %}
   {% if feed.description %}<meta name="description" content="{{ feed.description }}">{% endif %}
@@ -152,7 +153,7 @@
               <meta name="author" content="{{ post.author }}">
               {% if post.enclosures %}
                 <div class="rss-image">
-                  <a title="{{ post.title }}" alt="{{ post.title }}" href="{{ post.link }}"><img src="{{ post.enclosures[0].href }}" alt="{{ post.title }}"></a>
+                  <a title="{{ post.title }}" alt="{{ post.title }}" href="{{ post.link }}"><img src="{{ post.enclosures[0].href }}" alt="{{ post.title }}" loading="lazy"></a>
                 </div>
               {% endif %}
               <div class="rss-info">
