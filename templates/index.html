@@ -142,6 +142,15 @@
     <div id="rss-section" class="rss-content">
       <div class="rss-posts-list">
         {% for post in posts %}
+            {% if post.enclosures is not defined or post.enclosures == False or post.enclosures == [] %}
+              <style>
+                  #rss-section .rss-info{
+                      border-radius: 8px;
+                      border-top-left-radius: 8px;
+                      border-top-right-radius: 8px;
+                  }
+              </style>
+            {% endif %}
             <div class="rss">
               {% set year = post.published.split(' ')[3] %}
               {% set month = post.published.split(' ')[2] %}
@@ -156,7 +165,7 @@
                   <a title="{{ post.title }}" alt="{{ post.title }}" href="{{ post.link }}"><img src="{{ post.enclosures[0].href }}" alt="{{ post.title }}"  {% if loop.index <= 4 %} loading="eager" {% else %} loading="lazy" {% endif %}></a>
                 </div>
               {% endif %}
-              <div class="rss-info">
+              <div class="rss-info" {% if post.enclosures is not defined or post.enclosures == False or post.enclosures == [] %}style="border-radius: 8px; border-top-left-radius: 8px;border-top-right-radius: 8px;"{% endif %}>
                 <a title="{{ post.title }}" alt="{{ post.title }}" href="{{ post.link }}">
                   <div class="rss-date">{{ year }}-{{ month }}-{{ day }}</div>
                   <div class="rss-title">{{ post.title }}</div>
