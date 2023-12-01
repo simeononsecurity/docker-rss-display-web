@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Latest Posts</title>
+  <style>
+    body {
+      background-color: #333; /* Dark gray background */
+      color: #fff; /* White text */
+      font-family: 'Arial', sans-serif;
+    }
+    
+    h1 {
+        color: #fff; /* White header text */
+    }
+    
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    li {
+        margin-bottom: 20px; /* Increased margin for better separation */
+    }
+    
+    a {
+        text-decoration: none;
+        color: #ffffff; /* Link color */
+    }
+    
+    button {
+        background-color: #555; /* Lighter gray for buttons */
+        color: #fff; /* White text for buttons */
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+    }
+
+    img {
+        max-width: 100%; /* Ensure the image is responsive */
+        max-height: 300px; /* Limit the image height to 300px */
+        display: block; /* Remove extra space below the image */
+        margin: 10px 0; /* Add margin above and below the image for spacing */
+        border-radius: 8px; /* Rounded corners for the image */
+        box-shadow: 0 12px 40px rgba(0, 0, 0, .15);
+    }
+
+    /* Incorporating styles from the provided CSS for rss content */
+    #rss-section .rss-content {
+      margin-top: 20px; /* Adjusted margin for consistency */
+    }
+
+    #rss-section .rss-posts-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-gap: 20px;
+    }
+
+    #rss-section .rss {
+      border: none;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .15);
+    }
+
+    #rss-section .rss-image {
+      width: 100%;
+      height: 0;
+      padding-bottom: 56.25%;
+      position: relative;
+      max-width: 100%;
+      overflow: hidden;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+
+    #rss-section .rss-image img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      max-width: 100%;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .15);
+    }
+
+    #rss-section .rss-info {
+      padding: 16px;
+      background-color: #555; /* Darker gray background for rss info */
+      overflow: hidden;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+
+    #rss-section .rss-date {
+      font-size: 12px;
+      color: #fff; /* White text for rss date */
+    }
+
+    #rss-section .rss-title {
+      margin-top: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff; /* White text for rss title */
+    }
+
+    footer {
+      background-color: #555; /* Darker gray background for the footer */
+      color: #fff; /* White text for the footer */
+      margin: 10px;
+      padding: 10px;
+      text-align: center;
+      border-radius: 8px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .15);
+    }
+  
+    footer a {
+      color: #61dafb; /* Link color for the footer links */
+      text-decoration: none;
+    }
+  
+    footer a:hover {
+      text-decoration: underline; /* Underline on hover for better visibility */
+    }
+  </style>
+</head>
+<body>
+  <h1><a href="{{ rss_feed_url }}" alt="Latest Posts From {{ rss_feed_url }}" title="Latest Posts" target="_blank">Latest Posts</a></h1>  <ul>
+    <div id="rss-section" class="rss-content">
+      <div class="rss-posts-list">
+        {% for post in posts %}
+            <div class="rss">
+              {% if post.enclosures %}
+                <div class="rss-image">
+                  <a title="{{ post.title }}" alt="{{ post.title }}" href="{{ post.link }}"><img src="{{ post.enclosures[0].href }}" alt="{{ post.title }}"></a>
+                </div>
+              {% endif %}
+              <div class="rss-info">
+                <a title="{{ post.title }}" alt="{{ post.title }}" href="{{ post.link }}">
+                  <div class="rss-date">{{ post.pubDate }}</div>
+                  <div class="rss-title">{{ post.title }}</div>
+                </a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+    </div>
+</body>
+<footer>
+  <center>
+    <p>RSS Page Made By <a alt="RSS Page Made By SimeonOnSecurity" href="https://simeononsecurity.com">SimeonOnSecurity</a></p>
+    <p>Source Code at <a alt="Source Code at GitHub" href="https://github.com/simeononsecurity/docker-rss-display-web">GitHub</a></p>
+    <p>Docker Container Available On <a alt="Docker Container Available on DockerHub" href="https://hub.docker.com/r/simeononsecurity/rss-display-web">DockerHub</a></p>
+  </center>
+</footer>
+</html>
