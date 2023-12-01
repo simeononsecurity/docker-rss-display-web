@@ -48,7 +48,8 @@ docker run -p 8080:80 --name rss-container -e RSS_FEED_URL=https://example.com/r
 ```
 ## Dependencies
 
-- Flask==2.0.1
+- Flask==2.2.5
+- Werkzeug==2.0.1
 - feedparser==6.0.8
 
 These dependencies are listed in the `requirements.txt` file.
