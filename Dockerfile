@@ -11,6 +11,9 @@ LABEL org.opencontainers.image.source="https://github.com/simeononsecurity/rss-d
 LABEL org.opencontainers.image.description="This Docker container is designed to fetch and display the latest posts from a specified RSS feed using Python, Flask, and feedparser."
 LABEL org.opencontainers.image.authors="simeononsecurity"
 
+# Expose the Default Mapping
+EXPOSE 8080:80
+
 # Set the working directory to /app
 WORKDIR /app
 
