@@ -7,9 +7,15 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     rss_feed_url = os.environ.get('RSS_FEED_URL')
-    feed = feedparser.parse(rss_feed_url)
+    
+    try:
+        feed = feedparser.parse(rss_feed_url)
+    except Exception as e:
+        # Handle the exception, e.g., log the error and return an error page
+        return render_template('error.html', error_message=str(e))
+
     parsedfeed = feed.feed
-    latest_posts = feed.entries[:100]  # Displaying the latest 5 posts as an example
+    latest_posts = feed.entries[:50]  # Displaying the latest 5 posts as an example
     return render_template('index.html', feed=parsedfeed, posts=latest_posts, rss_feed_url=rss_feed_url)
 
 if __name__ == '__main__':
