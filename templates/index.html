@@ -2,7 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Latest Posts</title>
+  <title>Latest Posts{% if feed.title %} - {{ feed.title }}{% endif %}</title>
+  {% if feed.author %}<meta name="author" content="{{ feed.author }}">{% endif %}
+  {% if feed.description %}<meta name="description" content="{{ feed.description }}">{% endif %}
+  {% if feed.tags %}
+    {% set keyword_terms = [] %}
+    {% for tag in feed.tags %}
+      {% set _ = keyword_terms.append(tag.term) %}
+    {% endfor %}
+    <meta name="keywords" content="{{ ', '.join(keyword_terms) }}">
+  {% endif %}
   <style>
     body {
       background-color: #333; /* Dark gray background */
@@ -128,11 +137,19 @@
   </style>
 </head>
 <body>
-  <h1><a href="{{ rss_feed_url }}" alt="Latest Posts From {{ rss_feed_url }}" title="Latest Posts" target="_blank">Latest Posts</a></h1>  <ul>
+  <h1><a href="{{ rss_feed_url }}" alt="Latest Posts From {{ rss_feed_url }}" title="Latest Posts" target="_blank">Latest Posts{% if feed.title %} - {{ feed.title }}{% endif %}</a></h1>
     <div id="rss-section" class="rss-content">
       <div class="rss-posts-list">
         {% for post in posts %}
             <div class="rss">
+              {% set year = post.published.split(' ')[3] %}
+              {% set month = post.published.split(' ')[2] %}
+              {% set day = post.published.split(' ')[1] %}
+              <meta name="publication_date" content="{{ year }}-{{ month }}-{{ day }}">
+              <meta name="title" content="{{ post.title }}">
+              <meta name="link" content="{{ post.link }}">
+              <meta name="description" content="{{ post.description }}">
+              <meta name="author" content="{{ post.author }}">
               {% if post.enclosures %}
                 <div class="rss-image">
                   <a title="{{ post.title }}" alt="{{ post.title }}" href="{{ post.link }}"><img src="{{ post.enclosures[0].href }}" alt="{{ post.title }}"></a>
@@ -140,7 +157,7 @@
               {% endif %}
               <div class="rss-info">
                 <a title="{{ post.title }}" alt="{{ post.title }}" href="{{ post.link }}">
-                  <div class="rss-date">{{ post.pubDate }}</div>
+                  <div class="rss-date">{{ year }}-{{ month }}-{{ day }}</div>
                   <div class="rss-title">{{ post.title }}</div>
                 </a>
               </div>
@@ -148,6 +165,33 @@
           {% endfor %}
         </div>
     </div>
+  {% if feed.title %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Blog",
+      "name": "{{ feed.title }}",
+      {% if feed.author %}"author": "{{ feed.author }}",{% endif %}
+      {% if feed.link %}"url": "{{ feed.link }}",{% endif %}
+      {% if feed.description %}"description": "{{ feed.description }}",{% endif %}
+      {% if feed.tags %}
+        "keywords": [
+          {% for tag in feed.tags %}
+            "{{ tag.term }}"{% if not loop.last %},{% endif %}
+          {% endfor %}
+        ],
+      {% endif %}
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ feed.title }}",
+        "logo": {
+          "@type": "ImageObject",
+          {% if feed.description %}"url": "{{ feed.image.url }}"{% endif %}
+        }
+      }
+    }
+  </script>
+  {% endif %}
 </body>
 <footer>
   <center>
