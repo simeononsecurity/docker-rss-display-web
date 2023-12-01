@@ -1,10 +1,13 @@
 from flask import Flask, render_template
+from flask_caching import Cache
 import feedparser
 import os
 
 app = Flask(__name__)
+cache = Cache(app, config={'CACHE_TYPE': 'simple'})  # Use 'simple' cache for development; choose appropriate cache for production
 
 @app.route('/')
+@cache.cached(timeout=3600)  # Cache for 60 minutes
 def index():
     rss_feed_url = os.environ.get('RSS_FEED_URL')
     
