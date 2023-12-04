@@ -7,7 +7,7 @@ ENV container docker
 ENV TERM=xterm
 
 # Set Container Labels
-LABEL org.opencontainers.image.source="https://github.com/simeononsecurity/rss-display-web"
+LABEL org.opencontainers.image.source="https://github.com/simeononsecurity/docker-rss-display-web"
 LABEL org.opencontainers.image.description="This Docker container is designed to fetch and display the latest posts from a specified RSS feed using Python, Flask, and feedparser."
 LABEL org.opencontainers.image.authors="simeononsecurity"
 
