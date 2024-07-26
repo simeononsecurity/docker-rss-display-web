@@ -2,7 +2,7 @@
 
 This Docker container is designed to fetch and display the latest posts from a specified RSS feed using Python, Flask, and feedparser.
 
-[![Docker Image CI](https://github.com/simeononsecurity/docker-rss-display-web/actions/workflows/docker-image.yml/badge.svg)](https://github.com/simeononsecurity/docker-rss-display-web/actions/workflows/docker-image.yml)
+[![Sponsor](https://img.shields.io/badge/Sponsor-Click%20Here-ff69b4)](https://github.com/sponsors/simeononsecurity) [![Docker Image CI](https://github.com/simeononsecurity/docker-rss-display-web/actions/workflows/docker-image.yml/badge.svg)](https://github.com/simeononsecurity/docker-rss-display-web/actions/workflows/docker-image.yml)
 
 ## Usage
 
